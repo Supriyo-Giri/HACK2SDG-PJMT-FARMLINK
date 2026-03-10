@@ -1,0 +1,56 @@
+.farm-navbar {
+  background-color: #2E7D32;
+  padding: 10px 20px;
+}
+
+/* Logo */
+.brand-logo {
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* Nav links */
+.nav-link {
+  color: #ffffff !important;
+  font-weight: 500;
+  margin-right: 15px;
+}
+
+.nav-link:hover {
+  color: #C8E6C9 !important;
+}
+
+/* Login button */
+.login-btn {
+  background-color: #66BB6A;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+}
+
+.login-btn:hover {
+  background-color: white;
+  /* font-weight: 700; */
+  transition: 0.5s;
+}
+
+/* Logout button */
+.logout-btn {
+  background-color: #1c4e00;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+}
+
+.logout-btn:hover {
+  background-color: #ff4000;
+  color: white;
+}
+
+.user-name{
+  color: white;
+  font-weight: 600;
+}

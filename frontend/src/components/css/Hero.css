@@ -1,0 +1,82 @@
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+
+  background: linear-gradient(
+    135deg,
+    #1b5e20,
+    #2e7d32,
+    #43a047
+  );
+}
+
+/* SPHERES */
+
+.sphere {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.6;
+}
+
+/* top sphere */
+
+/* .sphere1 {
+  width: 300px;
+  height: 300px;
+  background: #66bb6a;
+  top: -80px;
+  left: -80px;
+} */
+
+/* bottom sphere */
+
+/* .sphere2 {
+  width: 350px;
+  height: 350px;
+  background: #81c784;
+  bottom: -120px;
+  right: -120px;
+} */
+
+/* hero content */
+
+.hero-content h1 {
+  font-size: 56px;
+  font-weight: 700;
+}
+
+.hero-content span {
+  color: #c8e6c9;
+}
+
+.hero-card {
+  width: 180px;
+  height: 180px;
+  background: white;
+  border-radius: 25px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 80px;
+
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.hero {
+  min-height: 90vh;
+  background: 
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+    url("https://images.unsplash.com/photo-1500937386664-56d1dfef3854");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  color: white;
+}
