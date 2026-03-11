@@ -24,7 +24,9 @@ const App = () => {
 
   const fetchUser = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/auth/me", {
+      // const res = await axios.get("http://localhost:5000/api/auth/me",
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/me`,
+      {
         withCredentials: true,
       });
 
@@ -41,7 +43,8 @@ const App = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/logout",
+        // "http://localhost:5000/api/auth/logout",
+        `${import.meta.env.VITE_API_URL}/api/auth/logout`,
         {},
         { withCredentials: true },
       );

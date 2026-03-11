@@ -26,7 +26,8 @@ const Signup = () => {
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/auth/register`,
+        // `http://localhost:5000/api/auth/register`,
+        `${import.meta.env.VITE_API_URL}/api/auth/register`,
         formData
       );
 
