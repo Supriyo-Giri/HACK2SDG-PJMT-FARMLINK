@@ -205,14 +205,14 @@ export const loginUserController = async (req, res) => {
     const accessCookieOptions = {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "none",
       maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
     };
 
     const refreshCookieOptions = {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "none",
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
     };
 
