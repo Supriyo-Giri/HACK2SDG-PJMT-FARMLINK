@@ -1,16 +1,15 @@
-.farm-navbar {
+/* .farm-navbar {
   background-color: #2E7D32;
   padding: 10px 20px;
 }
 
-/* Logo */
+
 .brand-logo {
   color: #ffffff !important;
   font-weight: 600;
   font-size: 20px;
 }
 
-/* Nav links */
 .nav-link {
   color: #ffffff !important;
   font-weight: 500;
@@ -21,7 +20,6 @@
   color: #C8E6C9 !important;
 }
 
-/* Login button */
 .login-btn {
   background-color: #66BB6A;
   color: white;
@@ -32,11 +30,9 @@
 
 .login-btn:hover {
   background-color: white;
-  /* font-weight: 700; */
   transition: 0.5s;
 }
 
-/* Logout button */
 .logout-btn {
   background-color: #1c4e00;
   color: white;
@@ -53,4 +49,76 @@
 .user-name{
   color: white;
   font-weight: 600;
+} */
+
+/* Navbar.css */
+:root {
+  --farm-green: #2d5a27;
+  --leaf-green: #4caf50;
+  --earth-brown: #5d4037;
+  --cream-white: #fcfaf2;
+}
+
+.farm-navbar {
+  background-color: var(--cream-white);
+  padding: 0.8rem 0;
+  border-bottom: 3px solid #e0eadd;
+}
+
+.brand-logo {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--farm-green) !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  color: var(--earth-brown) !important;
+  font-weight: 500;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--leaf-green) !important;
+}
+
+/* Custom Buttons */
+.btn-farm-primary {
+  background-color: var(--farm-green);
+  color: white;
+  border-radius: 25px;
+  padding: 8px 24px;
+  border: none;
+  transition: transform 0.2s;
+}
+
+.btn-farm-primary:hover {
+  background-color: #1e3d1a;
+  transform: translateY(-1px);
+  color: white;
+}
+
+.btn-farm-outline {
+  border: 2px solid var(--farm-green);
+  color: var(--farm-green);
+  border-radius: 25px;
+  padding: 6px 20px;
+  font-weight: 600;
+}
+
+.user-name {
+  color: var(--farm-green);
+  font-weight: bold;
+}
+
+/* Mobile Toggler */
+.custom-toggler {
+  border: none;
+}
+
+.custom-toggler:focus {
+  box-shadow: none;
 }

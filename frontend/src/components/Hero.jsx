@@ -1,53 +1,76 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext"; // Adjust path as needed
 import "./css/Hero.css";
 
 const Hero = () => {
-  return (
-    <section className="hero">
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
-      {/* Background spheres */}
-      <div className="sphere sphere1"></div>
-      <div className="sphere sphere2"></div>
+  const handleGetStarted = () => {
+    if (user) {
+      // Direct navigation if already logged in
+      navigate('/products');
+    } else {
+      // Optional: You could set a 'loading' state here to show a spinner on the button
+      
+      console.log("Redirecting to login in 1.5 seconds...");
+      
+      setTimeout(() => {
+        navigate('/login');
+      }, 1500); // 1500ms = 1.5 seconds
+    }
+  };
+
+  return (
+    <section className="hero-wrapper">
+      <div className="blob blob-1"></div>
+      <div className="blob blob-2"></div>
 
       <div className="container">
-        <div className="row align-items-center">
-
-          {/* LEFT CONTENT */}
-          <div className="col-lg-6 hero-content">
-            <h1>
-              Smart Farming <br />
+        <div className="hero-card row align-items-center g-0">
+          
+          <div className="col-lg-6 hero-text-section">
+            <div className="badge-new mb-3">NEW: Organic Growth Formulas</div>
+            <h1 className="hero-title">
+              Cultivate Success <br />
               with <span>FarmLink</span>
             </h1>
 
-            <p>
-              Get real-time weather alerts, crop insights,
-              and buy seeds or fertilizers directly from
-              trusted vendors.
+            <p className="hero-subtitle">
+              Bridging the gap between traditional wisdom and modern technology. 
+              Access premium fertilizers and expert advice to help your garden thrive.
             </p>
 
-            <div className="hero-buttons">
-              <button className="btn btn-light btn-lg me-3">
+            <div className="hero-cta-group">
+              <button 
+                className="btn btn-farm-primary btn-lg me-3 shadow"
+                onClick={handleGetStarted}
+              >
                 Get Started
               </button>
 
-              <button className="btn btn-outline-light btn-lg">
-                View Weather
+              <button 
+                className="btn btn-farm-outline-dark btn-lg"
+                onClick={() => navigate('/signup')}
+              >
+                Signup
               </button>
             </div>
           </div>
 
-          {/* RIGHT VISUAL */}
-          <div className="col-lg-6 hero-image">
-  <img
-    // src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854"
-    src="https://images.unsplash.com/photo-1549024449-d6968d2a435f?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    className="img-fluid"
-    alt="Green crop field"
-  />
-</div>
+          <div className="col-lg-6 hero-image-container">
+            <div className="image-overlay-card">
+              <img
+                src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=1000"
+                className="hero-main-img"
+                alt="Green crop field"
+              />
+            </div>
+          </div>
+
         </div>
       </div>
-
     </section>
   );
 };

@@ -13,25 +13,24 @@ import VerifyEmail from "./pages/VerifyEmail";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FeaturedFertilizer from "./components/FeaturedFertilizer";
+import Footer from "./components/Footer";
+import GrowthTimeline from "./components/GrowthTimeline";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Products from "./pages/Products";
 
 const App = () => {
-
   const [user, setUser] = useState(null);
 
   const fetchUser = async () => {
     try {
-
-      const res = await axios.get(
-        "http://localhost:5000/api/auth/me",
-        { withCredentials: true }
-      );
+      const res = await axios.get("http://localhost:5000/api/auth/me", {
+        withCredentials: true,
+      });
 
       setUser(res.data.user);
-
     } catch (error) {
-
       setUser(null);
-
     }
   };
 
@@ -41,15 +40,17 @@ const App = () => {
 
   const handleLogout = async () => {
     try {
-
       await axios.post(
         "http://localhost:5000/api/auth/logout",
         {},
-        { withCredentials: true }
+        { withCredentials: true },
       );
 
       setUser(null);
-
+      setTimeout(() => {
+        // This forces a full browser reload
+        window.location.href = "/";
+      }, 1500);
     } catch (error) {
       console.log(error);
     }
@@ -69,6 +70,9 @@ const App = () => {
           />
           <Hero />
           <Features />
+          <FeaturedFertilizer />
+          <GrowthTimeline />
+          <Footer />
         </>
       ),
     },
@@ -87,6 +91,14 @@ const App = () => {
     {
       path: "/verify/:token",
       element: <VerifyEmail />,
+    },
+    {
+      path: "/products",
+      element: (
+        <ProtectedRoute>
+          <Products />
+        </ProtectedRoute>
+      ),
     },
   ]);
 

@@ -1,80 +1,53 @@
-import React from "react";
+import React from 'react';
 import "./css/Features.css";
 
 const Features = () => {
+  const coreFeatures = [
+    {
+      icon: "🧪",
+      title: "Precision NPK Blends",
+      description: "Customized Nitrogen, Phosphorus, and Potassium ratios specifically for foliage, roots, or blooms."
+    },
+    {
+      icon: "🦠",
+      title: "Microbial Catalyst",
+      description: "Our 60-70% organic matter formula activates soil bacteria to unlock locked-away nutrients."
+    },
+    {
+      icon: "♻️",
+      title: "Circular Sourcing",
+      description: "100% natural ingredients sourced from sustainable composting, reducing carbon footprints."
+    },
+    {
+      icon: "🛡️",
+      title: "Chemical-Free Safety",
+      description: "Zero synthetic fillers. Safe for pets, children, and the beneficial insects in your garden."
+    }
+  ];
+
   return (
-    <section className="features-section py-5">
-      <div className="container text-center">
+    <section className="features-section-wrapper">
+      <div className="features-header">
+        <span className="features-badge">Our Natural Advantage</span>
+        <h2 className="features-main-title">Better for Plants, Better for Earth</h2>
+        <div className="title-underline"></div>
+      </div>
 
-        <h2 className="mb-4">Why Choose FarmLink</h2>
-
-        <p className="mb-5 text-muted">
-          A modern farming platform connecting farmers with eco-friendly
-          fertilizers, real-time insights, and smart agriculture tools.
-        </p>
-
-        <div className="row g-4">
-
-          {/* Natural Fertilizers */}
-          <div className="col-md-3">
-            <div className="card feature-card h-100">
-              <div className="card-body">
-                <div className="feature-icon">🌿</div>
-                <h5 className="card-title mt-3">Natural Fertilizers</h5>
-                <p className="card-text">
-                  Buy eco-friendly fertilizers that improve soil health and
-                  increase crop productivity naturally.
-                </p>
-              </div>
+      <div className="features-grid-container">
+        {coreFeatures.map((feature, index) => (
+          <div key={index} className="feature-card">
+            <div className="card-inner">
+              <div className="feature-icon-box">{feature.icon}</div>
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+              <div className="card-decoration"></div>
             </div>
           </div>
-
-          {/* Marketplace */}
-          <div className="col-md-3">
-            <div className="card feature-card h-100">
-              <div className="card-body">
-                <div className="feature-icon">🛒</div>
-                <h5 className="card-title mt-3">Farmer Marketplace</h5>
-                <p className="card-text">
-                  Connect directly with trusted vendors to buy seeds,
-                  fertilizers, and farming essentials.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Weather */}
-          <div className="col-md-3">
-            <div className="card feature-card h-100">
-              <div className="card-body">
-                <div className="feature-icon">🌦</div>
-                <h5 className="card-title mt-3">Weather Intelligence</h5>
-                <p className="card-text">
-                  Get accurate weather forecasts to plan irrigation,
-                  harvesting, and crop protection.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Smart Alerts */}
-          <div className="col-md-3">
-            <div className="card feature-card h-100">
-              <div className="card-body">
-                <div className="feature-icon">🚨</div>
-                <h5 className="card-title mt-3">Smart Alerts</h5>
-                <p className="card-text">
-                  Receive instant alerts about rainfall, pests,
-                  and changing climate conditions.
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        
-
+        ))}
+      </div>
+      
+      <div className="results-banner">
+        <p><strong>Visible results in 2–6 weeks</strong> — verified by our growth stage testing.</p>
       </div>
     </section>
   );

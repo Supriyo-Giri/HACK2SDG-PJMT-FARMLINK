@@ -28,18 +28,21 @@ const Login = () => {
         formData,
         {
           withCredentials: true, // important for cookies
-        }
+        },
       );
 
       toast.success(res.data.message);
 
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
+      // setTimeout(() => {
+      //   navigate("/");
+      // }, 1500);
 
+      setTimeout(() => {
+        // This forces a full browser reload
+        window.location.href = "/";
+      }, 1500);
     } catch (error) {
-      const message =
-        error?.response?.data?.message || "Login failed";
+      const message = error?.response?.data?.message || "Login failed";
 
       toast.error(message);
     }

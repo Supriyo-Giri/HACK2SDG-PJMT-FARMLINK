@@ -23,29 +23,23 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(formData)
 
     try {
       const res = await axios.post(
         `http://localhost:5000/api/auth/register`,
-        formData,
+        formData
       );
-      // if (res.data.message) {
-      //   toast.success("Signup successful!");
-      // }
-      // console.log(res.data)
-      if (res.data.success) {
-        toast.success(res.data.message);
 
-        // redirect to email verification page
+      if (res.data.success) {
+        toast.success(res.data.message || "Account created! Redirecting...");
+
+        // The 1.5s delay allows the user to see the success toast
         setTimeout(() => {
           navigate("/verify");
         }, 1500);
       }
     } catch (error) {
-      // toast.error(`Signup failed: ${error.response.data.message}`);
-      const message = error?.response?.data?.message || "Something went wrong";
-
+      const message = error?.response?.data?.message || "Signup failed. Please try again.";
       toast.error(message);
     }
   };
@@ -53,7 +47,8 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <div className="signup-card">
-        <h2>Create Account</h2>
+        <h2>Join the Green Side</h2>
+        <p className="signup-sub">Get premium organic fertilizers delivered to your door.</p>
 
         <form onSubmit={handleSubmit}>
           <input
@@ -98,14 +93,20 @@ const Signup = () => {
             onChange={handleChange}
             required
           >
-            <option value="">Select Role</option>
-            <option value="farmer">Farmer</option>
+            <option value="">I am a...</option>
+            <option value="farmer">Commercial Farmer</option>
+            <option value="homeGrower">Home Gardener</option>
             <option value="enthusiast">Plant Enthusiast</option>
-            <option value="homeGrower">Home Grower</option>
           </select>
 
-          <button type="submit">Sign Up</button>
+          <button type="submit" className="signup-btn">
+            Create Account
+          </button>
         </form>
+        
+        <p className="login-prompt">
+          Already have an account? <span onClick={() => navigate('/login')}>Login</span>
+        </p>
       </div>
     </div>
   );

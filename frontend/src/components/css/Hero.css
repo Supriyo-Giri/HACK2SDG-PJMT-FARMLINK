@@ -1,4 +1,4 @@
-.hero {
+/* .hero {
   position: relative;
   min-height: 90vh;
   display: flex;
@@ -14,7 +14,6 @@
   );
 }
 
-/* SPHERES */
 
 .sphere {
   position: absolute;
@@ -23,27 +22,6 @@
   opacity: 0.6;
 }
 
-/* top sphere */
-
-/* .sphere1 {
-  width: 300px;
-  height: 300px;
-  background: #66bb6a;
-  top: -80px;
-  left: -80px;
-} */
-
-/* bottom sphere */
-
-/* .sphere2 {
-  width: 350px;
-  height: 350px;
-  background: #81c784;
-  bottom: -120px;
-  right: -120px;
-} */
-
-/* hero content */
 
 .hero-content h1 {
   font-size: 56px;
@@ -54,19 +32,8 @@
   color: #c8e6c9;
 }
 
-.hero-card {
-  width: 180px;
-  height: 180px;
-  background: white;
-  border-radius: 25px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 80px;
-
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+.img-fluid{
+  margin-top: 3rem;
 }
 
 .hero {
@@ -79,4 +46,127 @@
   display: flex;
   align-items: center;
   color: white;
+} */
+
+/* Hero.css */
+.hero-wrapper {
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+  background-color: #fcfaf2; /* Matches Navbar cream */
+}
+
+/* Background Organic Shapes */
+.blob {
+  position: absolute;
+  filter: blur(60px);
+  z-index: 0;
+  border-radius: 50%;
+}
+
+.blob-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(76, 175, 80, 0.15); /* Leaf Green */
+  top: -100px;
+  right: -50px;
+}
+
+.blob-2 {
+  width: 300px;
+  height: 300px;
+  background: rgba(45, 90, 39, 0.1); /* Farm Green */
+  bottom: -50px;
+  left: -50px;
+}
+
+.hero-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
+  padding: 50px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #2d5a27; /* Farm Green */
+  line-height: 1.2;
+}
+
+.hero-title span {
+  color: #4caf50; /* Leaf Green */
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: #5d4037; /* Earth Brown */
+  margin: 25px 0;
+  line-height: 1.6;
+}
+
+/* Badge styling */
+.badge-new {
+  display: inline-block;
+  padding: 6px 16px;
+  background: #e8f5e9;
+  color: #2d5a27;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: 1px solid #c8e6c9;
+}
+
+/* Image Styling */
+.hero-image-container {
+  position: relative;
+  padding: 20px;
+}
+
+.hero-main-img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
+  height: 400px;
+}
+
+.stat-float-card {
+  position: absolute;
+  bottom: 40px;
+  left: -10px;
+  background: white;
+  padding: 15px 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  animation: float 3s ease-in-out infinite;
+}
+
+.stat-number {
+  font-weight: 800;
+  color: #4caf50;
+  font-size: 1.4rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Responsive fixes */
+@media (max-width: 991px) {
+  .hero-title { font-size: 2.5rem; }
+  .hero-card { padding: 30px; }
 }
