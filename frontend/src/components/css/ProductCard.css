@@ -1,24 +1,23 @@
+/* ProductCard.css */
 .product-card {
-  width: 320px;
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border: 1px solid #f0f0f0;
+  border: 1px solid #f0efe9;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .product-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 30px rgba(45, 90, 39, 0.1);
 }
 
-/* Image Section */
 .card-image-container {
   position: relative;
   height: 220px;
-  width: 100%;
   overflow: hidden;
 }
 
@@ -26,42 +25,49 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .card-image {
+  transform: scale(1.05);
 }
 
 .card-badge {
   position: absolute;
-  bottom: 12px;
-  left: 12px;
-  background: #2563eb;
+  top: 15px;
+  left: 15px;
+  background: var(--farm-green, #2d5a27);
   color: white;
-  padding: 4px 12px;
+  padding: 5px 12px;
   border-radius: 20px;
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 0.75rem;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .wishlist-btn {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 15px;
+  right: 15px;
   background: rgba(255, 255, 255, 0.9);
   border: none;
+  border-radius: 50%;
   width: 35px;
   height: 35px;
-  border-radius: 50%;
+  color: #ccc;
   cursor: pointer;
-  color: #666;
-  transition: color 0.2s ease;
+  transition: color 0.3s ease;
 }
 
 .wishlist-btn:hover {
-  color: #ff4757;
+  color: #ff4d4d;
 }
 
-/* Content Section */
 .card-content {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .card-header {
@@ -74,39 +80,32 @@
 .product-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #333;
   margin: 0;
 }
 
 .product-price {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: #2563eb;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--leaf-green, #4caf50);
 }
 
 .product-rating {
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.stars {
-  color: #fbbf24;
-  letter-spacing: 2px;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  color: #ffb400;
 }
 
 .review-count {
-  font-size: 0.85rem;
-  color: #888;
+  color: #999;
+  margin-left: 8px;
 }
 
 .product-description {
+  color: #666;
   font-size: 0.9rem;
-  color: #555;
   line-height: 1.5;
   margin-bottom: 20px;
-  /* Multi-line truncation */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -114,17 +113,24 @@
 }
 
 .add-to-cart-btn {
-  width: 100%;
-  padding: 12px;
-  background: #1a1a1a;
-  color: white;
-  border: none;
-  border-radius: 10px;
+  margin-top: auto;
+  background: #fcfaf2;
+  border: 2px solid var(--farm-green, #2d5a27);
+  color: var(--farm-green, #2d5a27);
+  padding: 10px;
+  border-radius: 12px;
   font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .add-to-cart-btn:hover {
-  background: #000000;
+  background: var(--farm-green, #2d5a27);
+  color: white;
+}
+
+.card-image {
+  display: block !important;
+  visibility: visible !important;
+  /* border: 5px solid red  */
+  background-color: #eee; /* Shows a placeholder if the image fails */
 }

@@ -1,51 +1,37 @@
-.products-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-.products-header {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
+/* Products.css */
 .products-header h1 {
-  font-size: 2.5rem;
-  color: #1a1a1a;
-  margin-bottom: 10px;
+  color: var(--farm-green);
+  margin-bottom: 1rem;
 }
 
 .products-header p {
-  color: #666;
-  font-size: 1.1rem;
+  color: #6d5b4b;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-/* The Grid Logic */
-.products-grid {
-  display: grid;
-  /* Automatically fits as many 320px columns as possible */
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
-  justify-items: center;
-}
-
-/* Loading & Error States */
-.loader, .error-message {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 50vh;
+.status-container {
+  text-align: center;
+  padding: 100px;
   font-size: 1.2rem;
-  font-weight: 500;
+  color: var(--farm-green);
 }
 
-.error-message {
-  color: #dc2626;
+/* This assumes your ProductCard uses these classes */
+.product-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #efebe9;
 }
 
-/* Responsive adjustments */
-@media (max-width: 640px) {
-  .products-grid {
-    grid-template-columns: 1fr;
-  }
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(45, 90, 39, 0.15);
+}
+
+.product-card img {
+  height: 250px;
+  object-fit: cover;
 }

@@ -3,14 +3,20 @@ import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
 const ProtectedRoute = ({ children }) => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
+  // 1. If we are still checking the session, return a loader.
+  // This prevents the redirect from triggering before the auth check completes.
+  if (loading) {
+    return <div className="loading-spinner">Verifying your session...</div>;
+  }
+
+  // 2. Only if loading is finished and there is no user, redirect.
   if (!user) {
-    // If not authenticated, redirect to login
     return <Navigate to="/login" replace />;
   }
 
-  // If authenticated, show the child component (e.g., Products)
+  // 3. Authenticated!
   return children;
 };
 
