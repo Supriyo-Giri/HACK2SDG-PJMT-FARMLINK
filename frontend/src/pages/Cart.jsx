@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CartCard from '../components/CartCard';
 import './css/Cart.css';
@@ -6,6 +7,7 @@ import './css/Cart.css';
 const Cart = () => {
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchCart = async () => {
     try {
@@ -24,13 +26,27 @@ const Cart = () => {
     fetchCart();
   }, []);
 
+  // Handle quantity changes (Increment/Decrement)
+  const handleUpdateQuantity = async (productId, delta) => {
+    try {
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/cart/update`, 
+        { productId, quantityDelta: delta },
+        { withCredentials: true }
+      );
+      fetchCart(); // Refresh cart after successful update
+      window.dispatchEvent(new Event("cartUpdated"));
+    } catch (err) {
+      alert("Could not update quantity.");
+    }
+  };
+
   const handleRemove = async (productId) => {
     try {
       await axios.delete(`${import.meta.env.VITE_API_URL}/api/cart/remove/${productId}`, {
         withCredentials: true,
       });
-      fetchCart(); // Refresh list
-      window.dispatchEvent(new Event("cartUpdated")); // Update Navbar badge
+      fetchCart();
+      window.dispatchEvent(new Event("cartUpdated"));
     } catch (err) {
       alert("Could not remove item.");
     }
@@ -44,7 +60,21 @@ const Cart = () => {
   };
 
   if (loading) return <div className="cart-status">Loading your cart...</div>;
-  if (!cart || cart.items.length === 0) return <div className="cart-status">Your cart is empty.</div>;
+
+  // New Empty State UI
+  if (!cart || !cart.items || cart.items.length === 0) {
+    return (
+      <div className="cart-status">
+        <h2>Your cart is empty.</h2>
+        <p>Looks like you haven't added anything yet.</p>
+        <button className="goto-products-btn" onClick={() => navigate('/products')}>
+          Go to Products Page
+        </button>
+      </div>
+    );
+  }
+
+  
 
   return (
     <div className="cart-page">
@@ -55,12 +85,13 @@ const Cart = () => {
             key={item.productId._id} 
             item={item} 
             onRemove={handleRemove} 
+            onUpdateQuantity={handleUpdateQuantity}
           />
         ))}
       </div>
       
       <div className="cart-total">
-        <h2>Total: ${calculateTotal()}</h2>
+        <h2>Total: ₹{calculateTotal()}</h2>
         <button className="checkout-btn">Proceed to Checkout</button>
       </div>
     </div>

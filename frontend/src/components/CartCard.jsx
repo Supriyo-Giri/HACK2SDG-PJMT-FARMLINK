@@ -10,7 +10,7 @@ const CartCard = ({ item, onRemove }) => {
       <img src={product.imageUrl} alt={product.name} className="cart-card-image" />
       <div className="cart-card-info">
         <h3>{product.name}</h3>
-        <p className="cart-card-price">${product.price.toFixed(2)}</p>
+        <p className="cart-card-price">₹{product.price.toFixed(2)}</p>
         <p className="cart-card-qty">Quantity: {item.quantity}</p>
       </div>
       <button 
