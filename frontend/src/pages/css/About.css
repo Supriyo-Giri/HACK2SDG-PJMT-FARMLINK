@@ -1,27 +1,168 @@
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 40px 20px;
+/* --- Root Variables: Easily adjust your brand identity here --- */
+:root {
+  --theme-color: #2d8a4e; /* Primary brand green */
+  --bg-color: #f9fbf9;    /* Soft off-white */
+  --text-main: #333;
+  --text-muted: #555;
+  --text-light: #888;
 }
 
-.feature-card {
-  padding: 20px;
-  border-radius: 12px;
-  background: #f8f9fa;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
+/* --- Global Reset & Base Styles --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  background: #ffffff;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
 }
 
-.about-hero {
-  text-align: center;
-  padding: 60px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+/* --- Main Layout Section --- */
+.featured-section {
+  display: flex;
+  flex-direction: column;
+  padding: 60px 5%;
+  min-height: 80vh;
+  transition: all 0.5s ease;
+}
+
+.main-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Product Selector Components --- */
+.product-selector {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 50px;
+}
+
+.product-selector button {
+  padding: 10px 25px;
+  border-radius: 30px;
+  border: 2px solid var(--theme-color);
+  background: transparent;
+  color: var(--theme-color);
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.product-selector button.active {
+  background: var(--theme-color);
   color: white;
+}
+
+/* --- Info Panel & Text Styles --- */
+.info-panel {
+  flex: 1.2;
+}
+
+.badge {
+  color: var(--theme-color);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.product-title {
+  font-size: 3.5rem;
+  margin: 10px 0;
+  color: var(--text-main);
+  line-height: 1.1;
+}
+
+.tagline {
+  color: var(--theme-color);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.desc {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+}
+
+/* --- Image & Animation --- */
+.image-display {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.floating-img {
+  width: 100%;
+  max-width: 400px;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2));
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* --- Data Presentation (Nutrient Table) --- */
+.nutrient-table {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+}
+
+.n-stat { text-align: center; }
+.n-stat .label { display: block; font-size: 0.7rem; color: var(--text-light); font-weight: bold; }
+.n-stat .value { font-size: 1.2rem; font-weight: bold; color: var(--theme-color); }
+
+/* --- Lists & Buttons --- */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 40px;
+}
+
+.benefits-list li {
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.buy-now {
+  background: var(--theme-color);
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buy-now:hover {
+  filter: brightness(1.2);
+  transform: scale(1.05);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 900px) {
+  .main-content { flex-direction: column; text-align: center; gap: 40px; }
+  .nutrient-table { grid-template-columns: 1fr 1fr; }
+  .product-title { font-size: 2.5rem; }
 }
