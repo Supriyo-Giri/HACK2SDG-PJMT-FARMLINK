@@ -36,7 +36,8 @@ const Signup = () => {
 
         // The 1.5s delay allows the user to see the success toast
         setTimeout(() => {
-          navigate("/verify");
+          // navigate("/verify");
+          navigate("/login")
         }, 1500);
       }
     } catch (error) {

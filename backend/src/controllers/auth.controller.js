@@ -167,12 +167,12 @@ export const loginUserController = async (req, res) => {
       });
     }
 
-    if (existingUser.isVerified === false) {
-      return res.status(400).json({
-        success: false,
-        message: "Please verify your email, then login again!",
-      });
-    }
+    // if (existingUser.isVerified === false) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Please verify your email, then login again!",
+    //   });
+    // }
 
     // Generate Tokens
     const accessToken = jwt.sign({ id: existingUser._id }, ENV.JWT_SECRET, {
