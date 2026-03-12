@@ -2,7 +2,6 @@ import Product from "../models/Products.js";
 import logger from "../utils/logger.js";
 
 // @desc    Get all products (with pagination)
-// @route   GET /api/products
 export const getAllProducts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -37,10 +36,14 @@ export const getProductById = async (req, res) => {
   }
 };
 
-// @desc    Create new product with image URL
+// @desc    Create new product with all fields
 export const createProduct = async (req, res) => {
   try {
-    const { name, price, category, stock, imageUrl } = req.body;
+    // Destructured all fields including new ones
+    const { 
+      name, price, category, stock, imageUrl, 
+      description, rating, reviews 
+    } = req.body;
     
     // Basic validation
     if (!name || !price || !imageUrl) {
@@ -55,7 +58,10 @@ export const createProduct = async (req, res) => {
       price, 
       category, 
       stock,
-      imageUrl // Saving the URL string
+      imageUrl,
+      description: description || "No description available.",
+      rating: rating || 0,
+      reviews: reviews || 0
     });
 
     res.status(201).json({ success: true, product });
@@ -67,11 +73,12 @@ export const createProduct = async (req, res) => {
 // @desc    Update product
 export const updateProduct = async (req, res) => {
   try {
+    // findByIdAndUpdate will automatically update all fields passed in req.body
     const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });
-    if (!product) return res.status(404).json({ message: "Product not found" });
+    if (!product) return res.status(404).json({ success: false, message: "Product not found" });
     res.status(200).json({ success: true, product });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

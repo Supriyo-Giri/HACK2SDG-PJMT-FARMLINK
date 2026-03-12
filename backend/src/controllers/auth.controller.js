@@ -247,17 +247,19 @@ export const logoutController = async (req, res) => {
   try {
     const refreshToken = req.cookies?.refreshToken;
 
-    if (!refreshToken) {
-      return res.status(400).json({
-        success: false,
-        message: "No session found",
-      });
+    if (refreshToken) {
+      await Session.deleteOne({ refreshToken });
     }
 
-    await Session.deleteOne({ refreshToken });
+    // These options MUST match your login controller EXACTLY
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "none", // Must be "none" because that's what you used in login
+    };
 
-    res.clearCookie("accessToken");
-    res.clearCookie("refreshToken");
+    res.clearCookie("accessToken", cookieOptions);
+    res.clearCookie("refreshToken", cookieOptions);
 
     return res.status(200).json({
       success: true,
@@ -265,10 +267,7 @@ export const logoutController = async (req, res) => {
     });
   } catch (error) {
     logger.error(`Logout error: ${error.message}`);
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 export const reVerifyEmailController = async (req, res) => {

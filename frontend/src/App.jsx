@@ -25,10 +25,12 @@ const App = () => {
   const fetchUser = async () => {
     try {
       // const res = await axios.get("http://localhost:5000/api/auth/me",
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/me`,
-      {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/auth/me`,
+        {
+          withCredentials: true,
+        },
+      );
 
       setUser(res.data.user);
     } catch (error) {
@@ -39,23 +41,27 @@ const App = () => {
   useEffect(() => {
     fetchUser();
   }, []);
-
   const handleLogout = async () => {
     try {
+      // 1. Call the backend logout API
       await axios.post(
-        // "http://localhost:5000/api/auth/logout",
         `${import.meta.env.VITE_API_URL}/api/auth/logout`,
         {},
         { withCredentials: true },
       );
 
+      // 2. Clear state immediately
       setUser(null);
-      setTimeout(() => {
-        // This forces a full browser reload
-        window.location.href = "/";
-      }, 1500);
+
+      // 3. Clear localStorage if you're storing anything there
+      localStorage.removeItem("user");
+
+      // 4. Force a clean refresh to clear any lingering memory/auth state
+      // window.location.assign() is cleaner than window.location.href
+      window.location.assign("/");
     } catch (error) {
-      console.log(error);
+      console.error("Logout failed:", error);
+      // Optional: Add a toast notification here
     }
   };
 
