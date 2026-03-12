@@ -1,6 +1,7 @@
 import React from 'react';
 import './css/About.css'; 
 import { useNavigate } from "react-router-dom"
+import myImg from "./farm-about-illustration.png"
 
 const About = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const About = () => {
         <div className="image-display">
           {/* Replace with your actual image path */}
           <img 
-            src="/farm-about-illustration.png" 
+            src={myImg} 
             alt="FarmLink Mission" 
             className="floating-img" 
           />
