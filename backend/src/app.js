@@ -14,14 +14,14 @@ const app = express();
 
 //middlewares
 app.use(helmet());
-app.use(cors({
-  origin: "https://farmlink-xplp.onrender.com",
-  credentials: true
-}));
 // app.use(cors({
-//     origin:"https://hack-2-sdg-pjmt-farmlink-7l1f.vercel.app",
-//   credentials: true}
-// ));
+//   origin: "https://farmlink-xplp.onrender.com",
+//   credentials: true
+// }));
+app.use(cors({
+    origin:"https://hack-2-sdg-pjmt-farmlink-7l1f.vercel.app",
+  credentials: true}
+));
 app.use(cookieParser());
 app.use(express.json())
 // app.use(requestLogger);
