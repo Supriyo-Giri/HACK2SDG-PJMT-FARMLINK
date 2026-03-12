@@ -13,9 +13,12 @@ const app = express();
 //middlewares
 app.use(helmet());
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
-}))
+  origin: [
+    "http://localhost:5173",
+    "https://hack-2-sdg-pjmt-farmlink-7l1f.vercel.app"
+  ],
+  credentials: true
+}));
 // app.use(cors());
 app.use(cookieParser());
 app.use(express.json())
