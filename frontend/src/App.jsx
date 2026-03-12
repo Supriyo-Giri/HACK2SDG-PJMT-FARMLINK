@@ -19,6 +19,7 @@ import GrowthTimeline from "./components/GrowthTimeline";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart"
+import About from "./pages/About";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -129,6 +130,19 @@ const App = () => {
             <Footer />
           </>
         )
+    },{
+      path: "/about",
+      element:(
+        <>
+        <Navbar
+            isLoggedIn={isLoggedIn}
+            user={user}
+            handleLogout={handleLogout}
+            />
+            <About />
+            <Footer />
+        </>
+      )
     }
     // {
     //   path: "/orders",

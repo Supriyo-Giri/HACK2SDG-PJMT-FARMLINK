@@ -57,7 +57,7 @@ const Navbar = ({ isLoggedIn, user, handleLogout }) => {
               <Link className="nav-link nav-effect" to="/products">Products</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link nav-effect" to="/orders">My Orders</Link>
+              <Link className="nav-link nav-effect" to="/cart">My Orders</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link nav-effect" to="/about">Our Story</Link>
