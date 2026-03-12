@@ -191,3 +191,42 @@
   .cart-page { margin: 20px auto; }
   .checkout-btn { width: 100%; }
 }
+
+
+/* Layout for the quantity controls wrapper */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between buttons and text */
+  margin-top: 8px;
+}
+
+/* Style for the + and - buttons */
+.qty-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.qty-btn:hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+
+/* Style for the disabled minus button */
+.qty-btn:disabled {
+  background-color: #f0f0f0;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Display for the current quantity */
+.cart-card-qty {
+  font-weight: 600;
+  min-width: 30px; /* Ensures consistent width so text doesn't jitter */
+  text-align: center;
+}
