@@ -6,6 +6,7 @@ import orderRoutes from "./routes/order.routes.js"
 import helmet from "helmet"
 import cors from "cors"
 import cookieParser from "cookie-parser";
+import { isAuthenticated } from "./middlewares/isAuthenticated.js"
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.use(express.json())
 // app.use(requestLogger);
 
 app.use("/api/auth",authRoutes);
-app.use("/api/products", productRoutes);
+app.use("/api/products",isAuthenticated, productRoutes);
 app.use("/api/orders", orderRoutes);
 
 export default app;

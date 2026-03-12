@@ -10,14 +10,24 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/products`);
+        const apiUrl = `${import.meta.env.VITE_API_URL}/api/products`;
+        const response = await fetch(apiUrl);
         
         if (!response.ok) {
-          throw new Error('Failed to fetch products');
+          throw new Error(`Error ${response.status}: Failed to fetch`);
         }
         
         const data = await response.json();
-        setProducts(data);
+
+        /** * ERROR FIX: 
+         * Your backend returns: { success: true, count: X, total: Y, products: [...] }
+         * We must set the state to data.products, not just data.
+         */
+        if (data.success && Array.isArray(data.products)) {
+          setProducts(data.products);
+        } else {
+          setProducts([]);
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -28,8 +38,8 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  if (loading) return <div className="loader">Loading amazing products...</div>;
-  if (error) return <div className="error-message">Error: {error}</div>;
+  if (loading) return <div className="status-container">Loading amazing products...</div>;
+  if (error) return <div className="status-container error">Error: {error}</div>;
 
   return (
     <main className="products-container">
@@ -38,11 +48,15 @@ const Products = () => {
         <p>Explore our handpicked selection of premium items.</p>
       </header>
 
-      <div className="products-grid">
-        {products.map((product) => (
-          <ProductCard key={product.id || product._id} product={product} />
-        ))}
-      </div>
+      {products.length === 0 ? (
+        <div className="status-container">No products found.</div>
+      ) : (
+        <div className="products-grid">
+          {products.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
+      )}
     </main>
   );
 };
