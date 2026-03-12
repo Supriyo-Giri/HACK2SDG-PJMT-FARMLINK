@@ -122,3 +122,23 @@
 .custom-toggler:focus {
   box-shadow: none;
 }
+
+.cart-icon-wrapper {
+  position: relative;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}

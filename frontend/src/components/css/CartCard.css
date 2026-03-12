@@ -1,0 +1,31 @@
+.cart-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin-bottom: 15px;
+  gap: 20px;
+}
+
+.cart-card-image {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-card-info { flex-grow: 1; }
+
+.cart-card-remove {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cart-card-remove:hover { background: #fecaca; }

@@ -18,6 +18,7 @@ import Footer from "./components/Footer";
 import GrowthTimeline from "./components/GrowthTimeline";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Products from "./pages/Products";
+import Cart from "./pages/Cart"
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -113,8 +114,22 @@ const App = () => {
           <Products />
           <Footer />
         </ProtectedRoute>
-      ),
+      )
     },
+    {
+        path: "/cart",
+        element: (
+          <>
+            <Navbar
+            isLoggedIn={isLoggedIn}
+            user={user}
+            handleLogout={handleLogout}
+            />
+            <Cart />
+            <Footer />
+          </>
+        )
+    }
     // {
     //   path: "/orders",
     //   element: (
