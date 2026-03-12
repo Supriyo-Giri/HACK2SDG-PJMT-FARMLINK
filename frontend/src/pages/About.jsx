@@ -1,7 +1,9 @@
 import React from 'react';
 import './css/About.css'; 
+import { useNavigate } from "react-router-dom"
 
 const About = () => {
+  const navigate = useNavigate();
   return (
     <section className="featured-section">
       <div className="main-content">
@@ -31,7 +33,9 @@ const About = () => {
             <li>✓ Expert-backed, high-quality manufacturing</li>
           </ul>
 
-          <button className="buy-now">Explore Products</button>
+          <button className="buy-now" onClick={()=>{
+            navigate("/products")
+          }}>Explore Products</button>
         </div>
 
         <div className="image-display">
