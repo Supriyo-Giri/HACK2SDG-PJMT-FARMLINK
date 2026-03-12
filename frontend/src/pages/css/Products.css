@@ -1,45 +1,51 @@
-.products-container { padding: 80px 10%; background: #fdfdfb; }
-.section-title { text-align: center; color: #1a3317; font-size: 2.5rem; }
-.section-sub { text-align: center; color: #666; margin-bottom: 50px; }
+.products-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
 
+.products-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.products-header h1 {
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.products-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* The Grid Logic */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  /* Automatically fits as many 320px columns as possible */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
+  justify-items: center;
 }
 
-.product-card {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  border: 1px solid #eee;
-  text-align: center;
-  transition: 0.3s;
+/* Loading & Error States */
+.loader, .error-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
-.product-card:hover {
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-  transform: translateY(-5px);
+.error-message {
+  color: #dc2626;
 }
 
-.card-badge {
-  background: #e9f2e8;
-  color: #2d5a27;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 0.8rem;
-  display: inline-block;
-  margin-bottom: 15px;
-}
-
-.add-btn {
-  background: #2d5a27;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 10px;
-  margin-top: 15px;
-  cursor: pointer;
-  font-weight: 600;
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
 }

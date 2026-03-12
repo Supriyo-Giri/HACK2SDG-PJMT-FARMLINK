@@ -99,7 +99,13 @@ const App = () => {
       path: "/products",
       element: (
         <ProtectedRoute>
+          <Navbar
+            isLoggedIn={isLoggedIn}
+            user={user}
+            handleLogout={handleLogout}
+          />
           <Products />
+          <Footer />
         </ProtectedRoute>
       ),
     },
