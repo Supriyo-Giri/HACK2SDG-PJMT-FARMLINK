@@ -115,6 +115,20 @@ const App = () => {
         </ProtectedRoute>
       ),
     },
+    // {
+    //   path: "/orders",
+    //   element: (
+    //     <ProtectedRoute>
+    //       <Navbar
+    //         isLoggedIn={isLoggedIn}
+    //         user={user}
+    //         handleLogout={handleLogout}
+    //       />
+    //       <Orders />
+    //       <Footer />
+    //     </ProtectedRoute>
+    //   ),
+    // },
   ]);
 
   return (
