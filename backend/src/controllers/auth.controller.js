@@ -8,6 +8,16 @@ import { ENV } from "../utils/env.js";
 import jwt from "jsonwebtoken";
 import { sendOTPMail } from "../utils/sendOTPMail.js";
 
+
+// Helper for dynamic cookie settings
+const isProduction = process.env.NODE_ENV === "production";
+
+const getCookieOptions = () => ({
+  httpOnly: true,
+  secure: isProduction,
+  sameSite: isProduction ? "none" : "lax",
+});
+
 export const healthCheckController = (req, res) => {
   try {
     logger.info(`Service up and running...`);
@@ -138,96 +148,35 @@ export const verifyEmailController = async (req, res) => {
 export const loginUserController = async (req, res) => {
   try {
     const { email, password } = req.body;
-
     if (!email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required!",
-      });
+      return res.status(400).json({ success: false, message: "All fields are required!" });
     }
 
     const existingUser = await User.findOne({ email });
-
     if (!existingUser) {
-      return res.status(400).json({
-        success: false,
-        message: "User does not exist",
-      });
+      return res.status(400).json({ success: false, message: "User does not exist" });
     }
 
-    const passwordValidation = await bcrypt.compare(
-      password,
-      existingUser.password,
-    );
-
+    const passwordValidation = await bcrypt.compare(password, existingUser.password);
     if (!passwordValidation) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid credentials",
-      });
+      return res.status(400).json({ success: false, message: "Invalid credentials" });
     }
 
-    // if (existingUser.isVerified === false) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "Please verify your email, then login again!",
-    //   });
-    // }
-
-    // Generate Tokens
-    const accessToken = jwt.sign({ id: existingUser._id }, ENV.JWT_SECRET, {
-      expiresIn: "3d",
-    });
-
-    const refreshToken = jwt.sign({ id: existingUser._id }, ENV.JWT_SECRET, {
-      expiresIn: "30d",
-    });
+    const accessToken = jwt.sign({ id: existingUser._id }, ENV.JWT_SECRET, { expiresIn: "3d" });
+    const refreshToken = jwt.sign({ id: existingUser._id }, ENV.JWT_SECRET, { expiresIn: "30d" });
 
     existingUser.isLoggedIn = true;
     await existingUser.save();
 
-    // Remove existing session
-    const existingSession = await Session.findOne({
-      userId: existingUser._id,
-    });
+    await Session.deleteOne({ userId: existingUser._id });
+    await Session.create({ userId: existingUser._id, refreshToken });
 
-    if (existingSession) {
-      await Session.deleteOne({ userId: existingUser._id });
-    }
+    const baseOptions = getCookieOptions();
 
-    // Create new session
-    await Session.create({
-      userId: existingUser._id,
-      refreshToken,
-    });
+    res.cookie("accessToken", accessToken, { ...baseOptions, maxAge: 3 * 24 * 60 * 60 * 1000 });
+    res.cookie("refreshToken", refreshToken, { ...baseOptions, maxAge: 30 * 24 * 60 * 60 * 1000 });
 
-    // Cookie Options
-    const accessCookieOptions = {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
-      maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
-    };
-
-    const refreshCookieOptions = {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-    };
-
-    // Set cookies
-    res.cookie("accessToken", accessToken, accessCookieOptions);
-    res.cookie("refreshToken", refreshToken, refreshCookieOptions);
-
-    // return res.status(200).json({
-    //   success: true,
-    //   message: `Welcome back ${existingUser.name}`,
-    //   user: existingUser,
-    // });
-    const safeUser = await User.findById(existingUser._id).select(
-      "-password -otp -otpExpiry -token",
-    );
+    const safeUser = await User.findById(existingUser._id).select("-password -otp -otpExpiry -token");
 
     return res.status(200).json({
       success: true,
@@ -236,35 +185,21 @@ export const loginUserController = async (req, res) => {
     });
   } catch (error) {
     logger.error(`Error in login User controller: ${error.message}`);
-
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 export const logoutController = async (req, res) => {
   try {
     const refreshToken = req.cookies?.refreshToken;
-
     if (refreshToken) {
       await Session.deleteOne({ refreshToken });
     }
 
-    // These options MUST match your login controller EXACTLY
-    const cookieOptions = {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none", // Must be "none" because that's what you used in login
-    };
-
+    const cookieOptions = getCookieOptions();
     res.clearCookie("accessToken", cookieOptions);
     res.clearCookie("refreshToken", cookieOptions);
 
-    return res.status(200).json({
-      success: true,
-      message: "Logged out successfully",
-    });
+    return res.status(200).json({ success: true, message: "Logged out successfully" });
   } catch (error) {
     logger.error(`Logout error: ${error.message}`);
     res.status(500).json({ success: false, message: error.message });
