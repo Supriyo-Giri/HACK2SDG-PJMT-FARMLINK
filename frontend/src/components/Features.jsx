@@ -160,7 +160,7 @@ const Features = () => {
             const alerts = [];
       
             // Logic for Abnormality Detection
-            if (current?.temp_c > 35) alerts.push({ type: 'heat', msg: 'Extreme Heat Warning: Water plants deeply now!' });
+            if (true || current?.temp_c > 35) alerts.push({ type: 'heat', msg: 'Extreme Heat Warning: Water plants deeply now!' });
             if (current?.temp_c < 4) alerts.push({ type: 'frost', msg: 'Frost Risk: Cover sensitive seedlings tonight.' });
             if (current?.wind_kph > 40) alerts.push({ type: 'wind', msg: 'High Winds: Secure tall plants or trellises.' });
             if (todayForecast?.daily_chance_of_rain > 80) alerts.push({ type: 'rain', msg: 'Heavy Rain Expected: Check drainage to avoid root rot.' });
